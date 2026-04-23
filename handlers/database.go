@@ -46,7 +46,7 @@ func init() {
 // GenerateCSRFToken generates a single-use CSRF token for the clear database operation
 func GenerateCSRFToken(c *fiber.Ctx) error {
 	sessionID := c.Cookies(SessionCookieName)
-	tokenStr := generateSessionID()
+	tokenStr, _ := generateSessionID()
 
 	csrfTokensMu.Lock()
 	csrfTokens[sessionID] = csrfToken{

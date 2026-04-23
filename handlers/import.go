@@ -120,10 +120,10 @@ func previewJSONImport(c *fiber.Ctx, data []byte) error {
 	}
 
 	// Validate structure
-	if exportData.App != "koffan" && exportData.App != "" {
+	if exportData.App != "bentomo" && exportData.App != "koffan" && exportData.App != "" {
 		return c.Status(400).JSON(ImportPreviewResponse{
 			Valid: false,
-			Error: "This file was not exported from Koffan",
+			Error: "This file was not exported from Bentomo",
 		})
 	}
 

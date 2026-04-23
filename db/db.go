@@ -5,11 +5,14 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"sync"
 
 	_ "github.com/mattn/go-sqlite3"
 )
 
 var DB *sql.DB
+
+var sortOrderMu sync.Mutex
 
 func Init() {
 	dbPath := os.Getenv("DB_PATH")
@@ -37,9 +40,9 @@ func Init() {
 		log.Fatal("Failed to ping database:", err)
 	}
 
-	// SQLite serializes writes; limit pool to 1 to avoid SQLITE_BUSY errors
-	// and eliminate the need for retry logic on concurrent writes.
-	DB.SetMaxOpenConns(1)
+	// SQLite WAL mode supports multiple readers; 5 connections avoids
+	// deadlocks when a transaction also needs to query (e.g. import).
+	DB.SetMaxOpenConns(5)
 	DB.SetMaxIdleConns(1)
 	DB.SetConnMaxLifetime(0)
 

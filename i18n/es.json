@@ -88,6 +88,9 @@
     "tab_data": "Datos",
     "delete_completed": "Eliminar todos los comprados",
     "delete_completed_description": "Elimina todos los artículos marcados como comprados de la lista.",
+    "archive_completed": "Archivar artículos comprados",
+    "archive_completed_description": "Elimina los artículos comprados pero mantiene tus secciones para la próxima vez.",
+    "archive_completed_count": "Archivados: {{count}}",
     "history_section_mode": "Sección para sugerencias del historial",
     "use_first_section": "Usar primera sección",
     "use_first_section_desc": "Si la sección no existe, añadir a la primera disponible",
@@ -110,6 +113,7 @@
     "delete_sections": "¿Eliminar {{count}} secciones seleccionadas?",
     "delete_section": "¿Eliminar sección '{{name}}'?",
     "delete_completed_items": "¿Eliminar todos los artículos comprados?",
+    "archive_completed_items": "¿Archivar todos los artículos comprados? Tus secciones se mantendrán.",
     "delete_template": "¿Eliminar plantilla \"{{name}}\"?"
   },
   "stats": {

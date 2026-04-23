@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Koffan Shopping List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bentomo Shopping List</title>
 
     <!-- Favicon & PWA -->
-    <link rel="icon" type="image/png" href="/static/favicon-96.png" sizes="96x96">
-    <link rel="icon" type="image/png" href="/static/icon-192.png" sizes="192x192">
-    <link rel="icon" href="/static/favicon.ico" sizes="48x48">
-    <link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
+    <link rel="icon" type="image/x-icon" href="/static/favicon.ico" sizes="48x48">
+    <link rel="icon" type="image/png" href="/static/bentomo-logo-smaller.png" sizes="96x96">
+    <link rel="icon" type="image/png" href="/static/bentomo-logo-smaller.png" sizes="32x32">
+    <link rel="apple-touch-icon" href="/static/bentomo-logo-smaller.png">
     <link rel="manifest" href="/static/manifest.json" crossorigin="use-credentials">
-    <meta name="theme-color" content="#f9a8d4">
+    <meta name="theme-color" content="#2563eb">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
     <!-- Dark mode initialization (must run before body renders to prevent flash) -->
@@ -45,7 +45,7 @@
                 window.currentLang = window.defaultLang;
             }
             // Set page title based on language
-            document.title = window.translations[window.currentLang]?.list?.title || 'Koffan Shopping List';
+            document.title = window.translations[window.currentLang]?.list?.title || 'Bentomo Shopping List';
             // Also set html lang attribute
             document.documentElement.lang = window.currentLang;
         })();
@@ -91,13 +91,13 @@
             } else if (theme === 'light') {
                 document.documentElement.classList.remove('dark');
                 localStorage.setItem('theme', 'light');
-                document.querySelector('meta[name="theme-color"]').content = '#f9a8d4';
+                document.querySelector('meta[name="theme-color"]').content = '#2563eb';
             } else {
                 // 'system' - remove stored preference
                 localStorage.removeItem('theme');
                 const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
                 document.documentElement.classList.toggle('dark', prefersDark);
-                document.querySelector('meta[name="theme-color"]').content = prefersDark ? '#1c1917' : '#f9a8d4';
+                document.querySelector('meta[name="theme-color"]').content = prefersDark ? '#1c1917' : '#2563eb';
             }
         }
 
@@ -117,7 +117,7 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#f9a8d4',
+                        primary: '#2563eb',
                         uncertain: '#fef3c7',
                     }
                 }
@@ -262,7 +262,7 @@
         .pull-to-refresh-spinner svg {
             width: 20px;
             height: 20px;
-            color: #f472b6;
+            color: #3b82f6;
             transition: transform 0.1s ease-out;
         }
         .pull-to-refresh-spinner.refreshing svg {
@@ -327,18 +327,18 @@
         }
         .sortable-ghost {
             opacity: 0.5;
-            background: #fce7f3 !important;
+            background: #dbeafe !important;
         }
         .dark .sortable-ghost {
             background: rgba(244, 114, 182, 0.3) !important;
         }
         .sortable-chosen {
-            background: #fdf2f8 !important;
-            border-left: 3px solid #ec4899 !important;
+            background: #eff6ff !important;
+            border-left: 3px solid #2563eb !important;
         }
         .dark .sortable-chosen {
             background: rgba(244, 114, 182, 0.15) !important;
-            border-left: 3px solid #ec4899 !important;
+            border-left: 3px solid #2563eb !important;
         }
         .sortable-drag {
             opacity: 0 !important;

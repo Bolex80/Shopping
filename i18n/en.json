@@ -21,8 +21,8 @@
     "logout": "Log out",
     "back_to_lists": "Back to lists"
   },
-  "list": {
-    "title": "Koffan Shopping List",
+    "list": {
+        "title": "Bentomo Shopping List",
     "empty_list": "empty list",
     "shopping_list": "Shopping list",
     "completed": "done",
@@ -89,6 +89,9 @@
     "tab_data": "Data",
     "delete_completed": "Delete all bought items",
     "delete_completed_description": "Removes all items marked as bought from the shopping list.",
+    "archive_completed": "Archive bought items",
+    "archive_completed_description": "Removes all bought items but keeps your sections for next time.",
+    "archive_completed_count": "Archived {{count}} items",
     "history_section_mode": "Section for history suggestions",
     "use_first_section": "Use first section",
     "use_first_section_desc": "If section doesn't exist, add to first available",
@@ -97,8 +100,8 @@
     "update_available": "New version available",
     "delete_completed_count": "Deleted bought: {{count}}"
   },
-  "login": {
-    "title": "Login - Koffan",
+    "login": {
+        "title": "Login - Bentomo",
     "subtitle": "Log in to continue",
     "password": "Password",
     "password_placeholder": "Enter password...",
@@ -111,6 +114,7 @@
     "delete_sections": "Delete {{count}} selected sections?",
     "delete_section": "Delete section '{{name}}'?",
     "delete_completed_items": "Delete all bought items?",
+    "archive_completed_items": "Archive all bought items? Your sections will be kept.",
     "delete_template": "Delete template \"{{name}}\"?"
   },
   "stats": {
@@ -208,7 +212,7 @@
     "no_templates_hint": "Create a template to quickly add products"
   },
   "onboarding": {
-    "welcome": "Welcome to Koffan!",
+    "welcome": "Welcome to Bentomo!",
     "description": "Your personal shopping assistant. Create your first shopping list to get started.",
     "list_name": "List name",
     "list_placeholder": "e.g. Weekly groceries",

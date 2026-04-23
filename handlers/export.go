@@ -50,6 +50,35 @@ type ExportItem struct {
 	Quantity    int    `json:"quantity"`
 }
 
+// UnmarshalJSON handles both string and int quantity values for backward compatibility with older exports.
+func (e *ExportItem) UnmarshalJSON(data []byte) error {
+	var tmp struct {
+		Name        string      `json:"name"`
+		Description string      `json:"description"`
+		Completed   bool        `json:"completed"`
+		Uncertain   bool        `json:"uncertain"`
+		Quantity    interface{} `json:"quantity"`
+	}
+	if err := json.Unmarshal(data, &tmp); err != nil {
+		return err
+	}
+	e.Name = tmp.Name
+	e.Description = tmp.Description
+	e.Completed = tmp.Completed
+	e.Uncertain = tmp.Uncertain
+	switch v := tmp.Quantity.(type) {
+	case float64:
+		e.Quantity = int(v)
+	case string:
+		if n, err := strconv.Atoi(v); err == nil {
+			e.Quantity = n
+		}
+	default:
+		e.Quantity = 0
+	}
+	return nil
+}
+
 // ExportTemplate represents a template
 type ExportTemplate struct {
 	Name        string               `json:"name"`
@@ -119,7 +148,7 @@ func exportAllAsJSON(c *fiber.Ctx, lists []db.List, includeTemplates, includeHis
 	exportData := ExportData{
 		Version:    "1.0",
 		ExportedAt: time.Now().UTC().Format(time.RFC3339),
-		App:        "koffan",
+		App:        "bentomo",
 		Data: ExportBody{
 			Lists: make([]ExportList, 0, len(lists)),
 		},
@@ -204,7 +233,7 @@ func exportAllAsJSON(c *fiber.Ctx, lists []db.List, includeTemplates, includeHis
 		}
 	}
 
-	filename := fmt.Sprintf("koffan-export-%s.json", time.Now().Format("2006-01-02"))
+	filename := fmt.Sprintf("bentomo-export-%s.json", time.Now().Format("2006-01-02"))
 	c.Set("Content-Disposition", fmt.Sprintf("attachment; filename=\"%s\"", filename))
 	c.Set("Content-Type", "application/json")
 
@@ -215,7 +244,7 @@ func exportListAsJSON(c *fiber.Ctx, list *db.List, sections []db.Section) error 
 	exportData := ExportData{
 		Version:    "1.0",
 		ExportedAt: time.Now().UTC().Format(time.RFC3339),
-		App:        "koffan",
+		App:        "bentomo",
 		Data: ExportBody{
 			Lists: make([]ExportList, 0, 1),
 		},
@@ -250,7 +279,7 @@ func exportListAsJSON(c *fiber.Ctx, list *db.List, sections []db.Section) error 
 
 	exportData.Data.Lists = append(exportData.Data.Lists, exportList)
 
-	filename := fmt.Sprintf("koffan-%s-%s.json", sanitizeFilename(list.Name), time.Now().Format("2006-01-02"))
+	filename := fmt.Sprintf("bentomo-%s-%s.json", sanitizeFilename(list.Name), time.Now().Format("2006-01-02"))
 	c.Set("Content-Disposition", fmt.Sprintf("attachment; filename=\"%s\"", filename))
 	c.Set("Content-Type", "application/json")
 
@@ -261,7 +290,7 @@ func exportAllAsCSV(c *fiber.Ctx, lists []db.List) error {
 	includeHistory := c.Query("include_history", "true") == "true"
 	delimiter := c.Query("delimiter", ",")
 
-	filename := fmt.Sprintf("koffan-export-%s.csv", time.Now().Format("2006-01-02"))
+	filename := fmt.Sprintf("bentomo-export-%s.csv", time.Now().Format("2006-01-02"))
 	c.Set("Content-Disposition", fmt.Sprintf("attachment; filename=\"%s\"", filename))
 	c.Set("Content-Type", "text/csv; charset=utf-8")
 
@@ -345,7 +374,7 @@ func exportAllAsCSV(c *fiber.Ctx, lists []db.List) error {
 }
 
 func exportListAsCSV(c *fiber.Ctx, list *db.List, sections []db.Section) error {
-	filename := fmt.Sprintf("koffan-%s-%s.csv", sanitizeFilename(list.Name), time.Now().Format("2006-01-02"))
+	filename := fmt.Sprintf("bentomo-%s-%s.csv", sanitizeFilename(list.Name), time.Now().Format("2006-01-02"))
 	c.Set("Content-Disposition", fmt.Sprintf("attachment; filename=\"%s\"", filename))
 	c.Set("Content-Type", "text/csv; charset=utf-8")
 

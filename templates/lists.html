@@ -33,11 +33,11 @@
                         :placeholder="t('lists.new_list')"
                         placeholder="Nazwa nowej listy..."
                         required
-                        class="flex-1 border border-stone-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent placeholder:text-stone-400"
+                        class="flex-1 border border-stone-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder:text-stone-400"
                     >
                     <button
                         type="submit"
-                        class="bg-pink-400 hover:bg-pink-500 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
                         x-text="t('common.add')"
                     >Dodaj</button>
                 </div>
@@ -70,14 +70,14 @@
                 <h2 class="text-lg font-semibold text-stone-800" x-text="t('templates.title')">Szablony</h2>
                 <button
                     @click="showCreateTemplate = true"
-                    class="text-sm text-pink-500 hover:text-pink-600 font-medium transition-colors"
+                    class="text-sm text-blue-600 hover:text-blue-700 font-medium transition-colors"
                     x-text="t('templates.new_template')"
                 >Nowy szablon</button>
             </div>
 
             <div id="templates-container" hx-get="/templates" hx-trigger="load" hx-swap="innerHTML">
                 <div class="text-center py-8">
-                    <div class="animate-spin w-6 h-6 border-2 border-pink-400 border-t-transparent rounded-full mx-auto"></div>
+                    <div class="animate-spin w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full mx-auto"></div>
                 </div>
             </div>
         </div>
@@ -117,7 +117,7 @@
                                 type="text"
                                 name="name"
                                 required
-                                class="w-full border border-stone-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent"
+                                class="w-full border border-stone-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             >
                         </div>
                         <div>
@@ -125,7 +125,7 @@
                             <input
                                 type="text"
                                 name="description"
-                                class="w-full border border-stone-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent"
+                                class="w-full border border-stone-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             >
                         </div>
                     </div>
@@ -138,7 +138,7 @@
                         >Anuluj</button>
                         <button
                             type="submit"
-                            class="bg-pink-400 hover:bg-pink-500 text-white px-5 py-2 rounded-lg text-sm font-medium transition-colors"
+                            class="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-medium transition-colors"
                             x-text="t('common.create')"
                         >Utwórz</button>
                     </div>
@@ -178,7 +178,7 @@
                                 type="text"
                                 name="name"
                                 required
-                                class="w-full border border-stone-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent"
+                                class="w-full border border-stone-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             >
                         </div>
                         <div>
@@ -186,7 +186,7 @@
                             <input
                                 type="text"
                                 name="description"
-                                class="w-full border border-stone-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent"
+                                class="w-full border border-stone-200 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                             >
                         </div>
                     </div>
@@ -200,7 +200,7 @@
                         >Anuluj</button>
                         <button
                             type="submit"
-                            class="bg-pink-400 hover:bg-pink-500 text-white px-5 py-2 rounded-lg text-sm font-medium transition-colors"
+                            class="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-medium transition-colors"
                             x-text="t('common.create')"
                         >Utwórz</button>
                     </div>
@@ -221,7 +221,7 @@ function listsPage() {
                 return window.getTranslation(key);
             }
             const translations = {{toJSON .Translations}};
-            const lang = localStorage.getItem('koffan-lang') || '{{.DefaultLang}}';
+            const lang = localStorage.getItem('bentomo-lang') || '{{.DefaultLang}}';
             const keys = key.split('.');
             let result = translations[lang];
             for (const k of keys) {

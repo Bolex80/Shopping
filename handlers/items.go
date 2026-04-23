@@ -202,6 +202,24 @@ func DeleteCompletedItems(c *fiber.Ctx) error {
 	return c.JSON(fiber.Map{"deleted": count})
 }
 
+// ArchiveCompletedItems deletes completed items from a specific list, keeping sections intact
+func ArchiveCompletedItems(c *fiber.Ctx) error {
+	listID, err := strconv.ParseInt(c.Params("id"), 10, 64)
+	if err != nil {
+		return sendError(c, 400, "error.invalid_id")
+	}
+
+	count, err := db.ArchiveCompletedItems(listID)
+	if err != nil {
+		return sendError(c, 500, "error.delete_failed")
+	}
+
+	BroadcastUpdate("completed_items_archived", map[string]int64{"list_id": listID, "count": count})
+
+	c.Set("HX-Trigger-After-Settle", `{"statsRefresh":"true"}`)
+	return c.JSON(fiber.Map{"archived": count})
+}
+
 // ToggleItem toggles the completed status of an item
 func ToggleItem(c *fiber.Ctx) error {
 	id, err := strconv.ParseInt(c.Params("id"), 10, 64)

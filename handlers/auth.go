@@ -2,7 +2,10 @@ package handlers
 
 import (
 	"crypto/rand"
+	"crypto/subtle"
+	"database/sql"
 	"encoding/hex"
+	"errors"
 	"log"
 	"os"
 	"shopping-list/db"
@@ -19,8 +22,9 @@ const (
 
 func getAppPassword() string {
 	pass := os.Getenv("APP_PASSWORD")
-	if pass == "" {
-		pass = "shopping123" // Default password for development
+	if pass == "" && !isAuthDisabled() {
+		log.Println("[AUTH] WARNING: APP_PASSWORD not set and auth is enabled. Using insecure default.")
+		pass = "shopping123"
 	}
 	return pass
 }
@@ -40,12 +44,12 @@ func isSecureConnection(c *fiber.Ctx) bool {
 	return c.Protocol() == "https"
 }
 
-func generateSessionID() string {
+func generateSessionID() (string, error) {
 	bytes := make([]byte, 32)
 	if _, err := rand.Read(bytes); err != nil {
-		log.Fatal("Failed to generate secure random bytes:", err)
+		return "", err
 	}
-	return hex.EncodeToString(bytes)
+	return hex.EncodeToString(bytes), nil
 }
 
 // LoginPage renders the login page
@@ -71,7 +75,7 @@ func Login(c *fiber.Ctx) error {
 	ip := c.IP()
 	password := c.FormValue("password")
 
-	if password != getAppPassword() {
+	if subtle.ConstantTimeCompare([]byte(password), []byte(getAppPassword())) != 1 {
 		// Record failed attempt
 		if loginLimiter != nil {
 			if loginLimiter.RecordAttempt(ip) {
@@ -88,10 +92,13 @@ func Login(c *fiber.Ctx) error {
 	}
 
 	// Create session
-	sessionID := generateSessionID()
+	sessionID, err := generateSessionID()
+	if err != nil {
+		return sendError(c, 500, "error.session_failed")
+	}
 	expiresAt := time.Now().Add(SessionDuration).Unix()
 
-	err := db.CreateSession(sessionID, expiresAt)
+	err = db.CreateSession(sessionID, expiresAt)
 	if err != nil {
 		return sendError(c, 500, "error.session_failed")
 	}
@@ -157,7 +164,7 @@ func AuthMiddleware(c *fiber.Ctx) error {
 	session, err := db.GetSession(sessionID)
 	if err != nil {
 		// Check if it's a "not found" error vs database error
-		if err.Error() == "sql: no rows in result set" {
+		if errors.Is(err, sql.ErrNoRows) {
 			log.Printf("[AUTH] Session not found in DB for %s %s (sessionID: %s...)", c.Method(), path, sessionID[:8])
 			// Only delete if session truly doesn't exist
 			db.DeleteSession(sessionID)

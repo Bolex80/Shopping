@@ -271,6 +271,9 @@ func SetActiveList(id int64) error {
 
 // MoveListUp moves a list up in sort order
 func MoveListUp(id int64) error {
+	sortOrderMu.Lock()
+	defer sortOrderMu.Unlock()
+
 	tx, err := DB.Begin()
 	if err != nil {
 		return err
@@ -302,6 +305,9 @@ func MoveListUp(id int64) error {
 
 // MoveListDown moves a list down in sort order
 func MoveListDown(id int64) error {
+	sortOrderMu.Lock()
+	defer sortOrderMu.Unlock()
+
 	tx, err := DB.Begin()
 	if err != nil {
 		return err
@@ -499,6 +505,9 @@ func DeleteSection(id int64) error {
 }
 
 func MoveSectionUp(id int64) error {
+	sortOrderMu.Lock()
+	defer sortOrderMu.Unlock()
+
 	tx, err := DB.Begin()
 	if err != nil {
 		return err
@@ -536,6 +545,9 @@ func MoveSectionUp(id int64) error {
 }
 
 func MoveSectionDown(id int64) error {
+	sortOrderMu.Lock()
+	defer sortOrderMu.Unlock()
+
 	tx, err := DB.Begin()
 	if err != nil {
 		return err
@@ -772,6 +784,18 @@ func DeleteCompletedItems() (int64, error) {
 	return result.RowsAffected()
 }
 
+func ArchiveCompletedItems(listID int64) (int64, error) {
+	result, err := DB.Exec(`
+		DELETE FROM items WHERE completed = TRUE AND section_id IN (
+			SELECT id FROM sections WHERE list_id = ?
+		)
+	`, listID)
+	if err != nil {
+		return 0, err
+	}
+	return result.RowsAffected()
+}
+
 func ToggleItemCompleted(id int64) (*Item, error) {
 	_, err := DB.Exec(`UPDATE items SET completed = NOT completed, updated_at = strftime('%s', 'now') WHERE id = ?`, id)
 	if err != nil {
@@ -977,6 +1001,9 @@ func reorderItemInSection(id int64, targetPosition int) (*Item, error) {
 }
 
 func MoveItemUp(id int64) error {
+	sortOrderMu.Lock()
+	defer sortOrderMu.Unlock()
+
 	tx, err := DB.Begin()
 	if err != nil {
 		return err
@@ -1021,6 +1048,9 @@ func MoveItemUp(id int64) error {
 }
 
 func MoveItemDown(id int64) error {
+	sortOrderMu.Lock()
+	defer sortOrderMu.Unlock()
+
 	tx, err := DB.Begin()
 	if err != nil {
 		return err

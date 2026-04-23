@@ -12,7 +12,7 @@
             type="checkbox"
             :checked="selectedSections.includes({{.Section.ID}})"
             @click.stop="toggleSection({{.Section.ID}})"
-            class="w-4 h-4 rounded border-stone-300 dark:border-stone-500 text-pink-400 focus:ring-pink-400 dark:bg-stone-600"
+            class="w-4 h-4 rounded border-stone-300 dark:border-stone-500 text-blue-500 focus:ring-blue-500 dark:bg-stone-600"
         >
     </template>
 
@@ -37,7 +37,7 @@
             @blur="if(editName.trim() && editName !== '{{.Section.Name | js}}') { $data.markLocalAction('section_updated'); fetch('/sections/{{.Section.ID}}', {method: 'PUT', headers: {'Content-Type': 'application/x-www-form-urlencoded'}, body: 'name=' + encodeURIComponent(editName)}).then(() => { editing = false; $data.refreshManageSectionsModal(); $data.refreshSection({{.Section.ID}}); $data.refreshSectionSelectsFromServer() }) } else { editing = false; editName = '{{.Section.Name | js}}' }"
             @click.stop
             maxlength="100"
-            class="w-full border border-pink-300 dark:border-pink-500 rounded px-2 py-0.5 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent bg-white dark:bg-stone-600 text-stone-800 dark:text-stone-100"
+            class="w-full border border-blue-400 dark:border-blue-600 rounded px-2 py-0.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-white dark:bg-stone-600 text-stone-800 dark:text-stone-100"
         >
     </form>
 

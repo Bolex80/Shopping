@@ -1,11 +1,11 @@
 {
-  "name": "Koffan Shopping List",
-  "short_name": "Koffan",
-  "description": "Shopping list management app",
+  "name": "Bentomo Shopping List",
+  "short_name": "Bentomo",
+  "description": "Bentomo shopping list management app",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#f3f4f6",
-  "theme_color": "#f9a8d4",
+  "theme_color": "#2563eb",
   "icons": [
     {
       "src": "/static/icon-192.png",

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page-title">Login - Koffan</title>
+    <title id="page-title">Login - Bentomo</title>
 
     <!-- Dark mode initialization (must run before body renders to prevent flash) -->
     <script>
@@ -28,7 +28,7 @@
             theme: {
                 extend: {
                     colors: {
-                        primary: '#f9a8d4',
+                        primary: '#2563eb',
                     }
                 }
             }
@@ -87,7 +87,7 @@
 <body class="bg-stone-50 dark:bg-stone-900 min-h-screen flex items-center justify-center px-4 transition-colors duration-200" x-data>
     <div class="bg-white dark:bg-stone-800 p-8 rounded-2xl border border-stone-200 dark:border-stone-700 shadow-sm w-full max-w-sm">
         <div class="text-center mb-8">
-            <img src="/static/koffan-logo.webp" alt="Koffan Logo" class="h-16 mx-auto mb-4">
+            <img src="/static/Bentomo-shopping-family-hugotaller.png" alt="Bentomo Logo" class="h-16 w-auto mx-auto mb-4">
             <p class="text-sm text-stone-400 dark:text-stone-500 mt-1" x-text="t('login.subtitle')"></p>
         </div>
 
@@ -108,7 +108,7 @@
                     type="password"
                     id="password"
                     name="password"
-                    class="w-full border border-stone-200 dark:border-stone-600 dark:bg-stone-700 rounded-lg px-4 py-3 text-sm text-stone-700 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent"
+                    class="w-full border border-stone-200 dark:border-stone-600 dark:bg-stone-700 rounded-lg px-4 py-3 text-sm text-stone-700 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     :placeholder="t('login.password_placeholder')"
                     autofocus
                     required
@@ -117,7 +117,7 @@
 
             <button
                 type="submit"
-                class="w-full bg-pink-400 hover:bg-pink-500 text-white font-medium py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 dark:focus:ring-offset-stone-800 transition-colors"
+                class="w-full bg-blue-500 hover:bg-blue-600 text-white font-medium py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-stone-800 transition-colors"
                 x-text="t('login.submit')"
             >
             </button>

@@ -20,8 +20,8 @@ RUN VERSION=$(cat VERSION | tr -d '\n') && \
 # Production stage
 FROM alpine:3.19
 
-LABEL org.opencontainers.image.source=https://github.com/PanSalut/Koffan
-LABEL org.opencontainers.image.description="Open source self-hosted groceries list for families and shared households"
+LABEL org.opencontainers.image.source=https://github.com/Bolex80/Shopping
+LABEL org.opencontainers.image.description="Bentomo Shopping List - self-hosted shopping list app"
 LABEL org.opencontainers.image.licenses=MIT
 
 WORKDIR /app
@@ -37,15 +37,15 @@ RUN mkdir -p /data
 
 # Set environment variables
 ENV APP_ENV=production
-ENV PORT=80
+ENV PORT=3001
 ENV DB_PATH=/data/shopping.db
 
 # Expose port
-EXPOSE 80
+EXPOSE 3001
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
-    CMD wget --no-verbose --tries=1 --spider http://127.0.0.1:80/login || exit 1
+    CMD wget --no-verbose --tries=1 --spider http://127.0.0.1:3001/ || exit 1
 
 # Run the application
 CMD ["./shopping-list"]

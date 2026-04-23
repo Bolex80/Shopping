@@ -1,7 +1,7 @@
-// Koffan Offline Storage - IndexedDB wrapper
+// Bentomo Offline Storage - IndexedDB wrapper
 class OfflineStorage {
     constructor() {
-        this.dbName = 'koffan-offline';
+        this.dbName = 'bentomo-offline';
         this.dbVersion = 5;  // Must be >= existing version in browser
         this.db = null;
     }

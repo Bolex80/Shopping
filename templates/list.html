@@ -9,7 +9,7 @@
                 <!-- Logo and List Name -->
                 <div class="flex items-center gap-2 md:gap-3 overflow-hidden">
                     <a href="/" class="hover:opacity-80 transition-opacity flex-shrink-0" :title="t('nav.back_to_lists')">
-                        <img src="/static/koffan-logo.webp" alt="Koffan Logo" class="h-8 md:h-10">
+                        <img src="/static/Bentomo-shopping-family-hugotaller.png" alt="Bentomo Logo" class="h-8 md:h-10 w-auto">
                     </a>
                     <span class="text-stone-300 dark:text-stone-600 text-sm md:text-base">/</span>
                     <div class="flex items-center gap-1.5 md:gap-2 overflow-hidden">
@@ -31,7 +31,7 @@
                     <div class="flex items-center gap-2 bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 rounded-full px-3 py-1.5 shadow-sm"
                          x-show="stats.total > 0">
                         <div class="w-2 h-2 rounded-full transition-colors"
-                             :class="stats.percentage === 100 ? 'bg-pink-500' : 'bg-pink-400'"></div>
+                             :class="stats.percentage === 100 ? 'bg-blue-600' : 'bg-blue-500'"></div>
                         <span class="text-sm font-medium text-stone-600 dark:text-stone-300" x-text="stats.completed + '/' + stats.total"></span>
                         <span class="text-xs text-stone-400 dark:text-stone-500" x-text="stats.percentage + '%'"></span>
                     </div>
@@ -54,7 +54,7 @@
                     <button
                         @click="toggleShowCompleted({{.List.ID}})"
                         class="p-1.5 rounded-lg transition-colors"
-                        :class="showCompleted ? 'text-stone-400 hover:text-stone-600 dark:text-stone-500 dark:hover:text-stone-300' : 'text-pink-400 hover:text-pink-500'"
+                        :class="showCompleted ? 'text-stone-400 hover:text-stone-600 dark:text-stone-500 dark:hover:text-stone-300' : 'text-blue-500 hover:text-blue-600'"
                         :title="showCompleted ? t('list.hide_completed') : t('list.show_completed')"
                     >
                         <svg x-show="showCompleted" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -98,7 +98,7 @@
                     <button
                         @click="toggleShowCompleted({{.List.ID}})"
                         class="p-1.5 rounded-lg transition-colors"
-                        :class="showCompleted ? 'text-stone-400 hover:text-stone-600 dark:text-stone-500 dark:hover:text-stone-300' : 'text-pink-400 hover:text-pink-500'"
+                        :class="showCompleted ? 'text-stone-400 hover:text-stone-600 dark:text-stone-500 dark:hover:text-stone-300' : 'text-blue-500 hover:text-blue-600'"
                         :title="showCompleted ? t('list.hide_completed') : t('list.show_completed')"
                     >
                         <svg x-show="showCompleted" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -127,7 +127,7 @@
             <!-- Progress bar (desktop only) -->
             <div class="hidden md:block h-1 bg-stone-200 dark:bg-stone-700 rounded-full mb-4 overflow-hidden" x-show="stats.total > 0">
                 <div class="h-full rounded-full transition-[width] duration-500"
-                     :class="stats.percentage === 100 ? 'bg-pink-500' : 'bg-pink-400'"
+                     :class="stats.percentage === 100 ? 'bg-blue-600' : 'bg-blue-500'"
                      :style="'width: ' + stats.percentage + '%'"
                      style="width: {{.Stats.Percentage}}%"></div>
             </div>
@@ -146,7 +146,7 @@
                 @input.debounce.150ms="performSearch($event.target.value)"
                 @keydown.escape="clearSearch()"
                 :placeholder="t('history.search_placeholder')"
-                class="w-full pl-10 pr-10 py-2.5 text-sm border border-stone-200 dark:border-stone-600 rounded-xl bg-white dark:bg-stone-800 text-stone-800 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent transition-colors">
+                class="w-full pl-10 pr-10 py-2.5 text-sm border border-stone-200 dark:border-stone-600 rounded-xl bg-white dark:bg-stone-800 text-stone-800 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors">
             <button
                 x-show="searchQuery"
                 x-cloak
@@ -176,7 +176,7 @@
                     class="flex items-center gap-3"
                 >
                     <select name="section_id" x-ref="desktopSectionSelect" required
-                        class="w-40 border border-stone-200 dark:border-stone-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent bg-stone-50 dark:bg-stone-700 text-stone-700 dark:text-stone-200">
+                        class="w-40 border border-stone-200 dark:border-stone-600 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-stone-50 dark:bg-stone-700 text-stone-700 dark:text-stone-200">
                         {{range $index, $section := .Sections}}
                         <option value="{{$section.ID}}" {{if eq $index 0}}selected{{end}}>{{$section.Name}}</option>
                         {{end}}
@@ -188,7 +188,7 @@
                             @blur="hideSuggestionsDelayed()"
                             @focus="$event.target.value.length >= 2 && fetchSuggestions($event.target.value)"
                             autocomplete="off"
-                            class="w-full border border-stone-200 dark:border-stone-600 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent placeholder:text-stone-400 dark:placeholder:text-stone-500 bg-white dark:bg-stone-700 text-stone-800 dark:text-stone-100">
+                            class="w-full border border-stone-200 dark:border-stone-600 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder:text-stone-400 dark:placeholder:text-stone-500 bg-white dark:bg-stone-700 text-stone-800 dark:text-stone-100">
                         <!-- Suggestions dropdown -->
                         <div x-show="showSuggestions && suggestions.length > 0" x-cloak
                              x-transition:enter="transition ease-out duration-100"
@@ -198,7 +198,7 @@
                             <template x-for="(suggestion, index) in suggestions" :key="suggestion.name">
                                 <button type="button"
                                     @mousedown.prevent="selectSuggestion(suggestion, $refs.desktopNameInput, $refs.desktopSectionSelect)"
-                                    :class="index === selectedSuggestionIndex ? 'bg-pink-50 dark:bg-pink-900/30' : 'hover:bg-stone-50 dark:hover:bg-stone-700'"
+                                    :class="index === selectedSuggestionIndex ? 'bg-blue-50 dark:bg-blue-900/30' : 'hover:bg-stone-50 dark:hover:bg-stone-700'"
                                     class="w-full text-left px-4 py-2.5 text-sm flex items-center justify-between border-b border-stone-100 dark:border-stone-700 last:border-b-0">
                                     <span x-text="suggestion.name" class="text-stone-700 dark:text-stone-200"></span>
                                     <span class="text-xs text-stone-400 dark:text-stone-500" x-text="suggestion.usage_count + 'x'"></span>
@@ -207,9 +207,9 @@
                         </div>
                     </div>
                     <input type="text" name="description" :placeholder="t('items.note')"
-                        class="w-48 border border-stone-200 dark:border-stone-600 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent placeholder:text-stone-400 dark:placeholder:text-stone-500 bg-white dark:bg-stone-700 text-stone-800 dark:text-stone-100">
+                        class="w-48 border border-stone-200 dark:border-stone-600 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder:text-stone-400 dark:placeholder:text-stone-500 bg-white dark:bg-stone-700 text-stone-800 dark:text-stone-100">
                     <button type="submit"
-                        class="bg-pink-400 hover:bg-pink-500 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
+                        class="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
                         x-text="t('common.add')">
                     </button>
                     <button
@@ -260,7 +260,7 @@
                 <p class="text-sm text-stone-400 dark:text-stone-500 mt-1" x-text="t('sections.add_first_section')"></p>
                 <button
                     @click="showManageSections = true"
-                    class="mt-4 bg-pink-400 hover:bg-pink-500 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
+                    class="mt-4 bg-blue-500 hover:bg-blue-600 text-white px-5 py-2.5 rounded-lg text-sm font-medium transition-colors"
                     x-text="t('sections.add_section_btn')">
                 </button>
             </div>
@@ -274,7 +274,7 @@
             <!-- Stats -->
             <div class="flex items-center gap-2">
                 <div class="w-2.5 h-2.5 rounded-full transition-colors"
-                     :class="stats.percentage === 100 ? 'bg-pink-500' : 'bg-pink-400'"></div>
+                     :class="stats.percentage === 100 ? 'bg-blue-600' : 'bg-blue-500'"></div>
                 <span class="text-sm font-medium text-stone-700 dark:text-stone-200" x-text="stats.completed + '/' + stats.total"></span>
                 <span class="text-sm text-stone-400 dark:text-stone-500" x-text="stats.percentage + '%'"></span>
             </div>
@@ -296,7 +296,7 @@
                 <button
                     id="mobile-add-item-btn"
                     @click="showAddItem = true"
-                    class="w-12 h-12 bg-pink-400 hover:bg-pink-500 text-white rounded-xl shadow-lg flex items-center justify-center active:scale-95 transition-transform"
+                    class="w-12 h-12 bg-blue-500 hover:bg-blue-600 text-white rounded-xl shadow-lg flex items-center justify-center active:scale-95 transition-transform"
                     {{if not .Sections}}style="display:none"{{end}}
                 >
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -321,7 +321,7 @@
                 class="space-y-4"
             >
                 <select name="section_id" x-ref="mobileSectionSelect" required
-                    class="w-full border border-stone-200 dark:border-stone-600 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400 bg-stone-50 dark:bg-stone-700 text-stone-800 dark:text-stone-100">
+                    class="w-full border border-stone-200 dark:border-stone-600 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-stone-50 dark:bg-stone-700 text-stone-800 dark:text-stone-100">
                     {{range $index, $section := .Sections}}
                     <option value="{{$section.ID}}" {{if eq $index 0}}selected{{end}}>{{$section.Name}}</option>
                     {{end}}
@@ -333,7 +333,7 @@
                         @blur="hideSuggestionsDelayed()"
                         @focus="$event.target.value.length >= 2 && fetchSuggestions($event.target.value)"
                         autocomplete="off"
-                        class="w-full border border-stone-200 dark:border-stone-600 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400 bg-white dark:bg-stone-700 text-stone-800 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500">
+                        class="w-full border border-stone-200 dark:border-stone-600 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-stone-700 text-stone-800 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500">
                     <!-- Suggestions dropdown -->
                     <div x-show="showSuggestions && suggestions.length > 0" x-cloak
                          x-transition:enter="transition ease-out duration-100"
@@ -343,7 +343,7 @@
                         <template x-for="(suggestion, index) in suggestions" :key="suggestion.name">
                             <button type="button"
                                 @mousedown.prevent="selectSuggestion(suggestion, $refs.itemNameInput, $refs.mobileSectionSelect)"
-                                :class="index === selectedSuggestionIndex ? 'bg-pink-50 dark:bg-pink-900/30' : 'hover:bg-stone-50 dark:hover:bg-stone-700'"
+                                :class="index === selectedSuggestionIndex ? 'bg-blue-50 dark:bg-blue-900/30' : 'hover:bg-stone-50 dark:hover:bg-stone-700'"
                                 class="w-full text-left px-4 py-2.5 flex items-center justify-between border-b border-stone-100 dark:border-stone-700 last:border-0">
                                 <span class="text-sm text-stone-700 dark:text-stone-200" x-text="suggestion.name"></span>
                                 <span class="text-xs text-stone-400 dark:text-stone-500" x-text="suggestion.usage_count + 'x'"></span>
@@ -352,12 +352,12 @@
                     </div>
                 </div>
                 <textarea name="description" :placeholder="t('items.note_optional')" rows="2"
-                    class="w-full border border-stone-200 dark:border-stone-600 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400 resize-none bg-white dark:bg-stone-700 text-stone-800 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500"></textarea>
+                    class="w-full border border-stone-200 dark:border-stone-600 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none bg-white dark:bg-stone-700 text-stone-800 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500"></textarea>
                 <label class="flex items-center justify-between py-2 cursor-pointer select-none">
                     <span class="text-sm text-stone-600 dark:text-stone-300" x-text="t('items.add_more')"></span>
                     <div class="relative">
                         <input type="checkbox" x-model="addMore" class="sr-only peer">
-                        <div class="w-10 h-6 bg-stone-200 dark:bg-stone-600 rounded-full peer peer-checked:bg-pink-400 transition-colors"></div>
+                        <div class="w-10 h-6 bg-stone-200 dark:bg-stone-600 rounded-full peer peer-checked:bg-blue-500 transition-colors"></div>
                         <div class="absolute left-0.5 top-0.5 w-5 h-5 bg-white rounded-full shadow-sm transition-transform peer-checked:translate-x-4"></div>
                     </div>
                 </label>
@@ -367,7 +367,7 @@
                         x-text="t('common.cancel')">
                     </button>
                     <button type="submit"
-                        class="flex-1 bg-pink-400 hover:bg-pink-500 text-white py-3 rounded-lg text-sm font-medium transition-colors"
+                        class="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg text-sm font-medium transition-colors"
                         x-text="t('common.add')">
                     </button>
                 </div>
@@ -398,8 +398,8 @@
             >
                 <div class="flex gap-2">
                     <input type="text" name="name" :placeholder="t('sections.new_section')" required
-                        class="flex-1 border border-stone-200 dark:border-stone-600 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400 bg-white dark:bg-stone-700 text-stone-800 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500">
-                    <button type="submit" class="bg-pink-400 hover:bg-pink-500 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition-colors"
+                        class="flex-1 border border-stone-200 dark:border-stone-600 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-stone-700 text-stone-800 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500">
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2.5 rounded-lg text-sm font-medium transition-colors"
                         x-text="t('common.add')">
                     </button>
                 </div>
@@ -526,9 +526,9 @@
             <h3 class="text-lg font-semibold text-stone-800 dark:text-stone-100 mb-4" x-text="t('common.edit')"></h3>
             <form @submit.prevent="submitEditItem()" class="space-y-4">
                 <input type="text" x-model="editItemName" :placeholder="t('items.name')" required
-                    class="w-full border border-stone-200 dark:border-stone-600 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400 bg-white dark:bg-stone-700 text-stone-800 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500">
+                    class="w-full border border-stone-200 dark:border-stone-600 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-stone-700 text-stone-800 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500">
                 <textarea x-model="editItemDescription" :placeholder="t('items.note')" rows="2"
-                    class="w-full border border-stone-200 dark:border-stone-600 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400 resize-none bg-white dark:bg-stone-700 text-stone-800 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500"></textarea>
+                    class="w-full border border-stone-200 dark:border-stone-600 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none bg-white dark:bg-stone-700 text-stone-800 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500"></textarea>
                 <div class="flex items-center gap-2">
                     <button type="button"
                         @click="editItemQuantity = Math.max(0, (parseInt(editItemQuantity) || 0) - 1)"
@@ -540,7 +540,7 @@
                     </button>
                     <div class="relative flex-1">
                         <input type="number" x-model="editItemQuantity" :placeholder="t('items.quantity')" min="0" max="999"
-                            class="w-full border border-stone-200 dark:border-stone-600 rounded-lg px-4 py-3 text-sm text-center focus:outline-none focus:ring-2 focus:ring-pink-400 bg-white dark:bg-stone-700 text-stone-800 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500">
+                            class="w-full border border-stone-200 dark:border-stone-600 rounded-lg px-4 py-3 text-sm text-center focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-stone-700 text-stone-800 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500">
                         <span class="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-stone-400 dark:text-stone-500 pointer-events-none" x-show="editItemQuantity > 0" x-cloak x-text="'×'"></span>
                     </div>
                     <button type="button"
@@ -557,7 +557,7 @@
                         class="flex-1 border border-stone-200 dark:border-stone-600 text-stone-600 dark:text-stone-300 py-3 rounded-lg text-sm font-medium hover:bg-stone-50 dark:hover:bg-stone-700 transition-colors"
                         x-text="t('common.cancel')">
                     </button>
-                    <button type="submit" class="flex-1 bg-pink-400 hover:bg-pink-500 text-white py-3 rounded-lg text-sm font-medium transition-colors"
+                    <button type="submit" class="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg text-sm font-medium transition-colors"
                         x-text="t('common.save')">
                     </button>
                 </div>
@@ -654,7 +654,7 @@
                 <button
                     @click="settingsTab = 'account'"
                     :class="settingsTab === 'account'
-                        ? 'bg-pink-400 text-white'
+                        ? 'bg-blue-500 text-white'
                         : 'bg-stone-100 dark:bg-stone-700 text-stone-600 dark:text-stone-300 hover:bg-stone-200 dark:hover:bg-stone-600'"
                     class="flex-1 px-4 py-2 rounded-full text-sm font-medium transition-colors">
                     <span x-text="t('settings.tab_account')"></span>
@@ -662,7 +662,7 @@
                 <button
                     @click="settingsTab = 'shopping_list'"
                     :class="settingsTab === 'shopping_list'
-                        ? 'bg-pink-400 text-white'
+                        ? 'bg-blue-500 text-white'
                         : 'bg-stone-100 dark:bg-stone-700 text-stone-600 dark:text-stone-300 hover:bg-stone-200 dark:hover:bg-stone-600'"
                     class="flex-1 px-4 py-2 rounded-full text-sm font-medium transition-colors">
                     <span x-text="t('settings.tab_shopping_list')"></span>
@@ -680,7 +680,7 @@
                     <div class="grid grid-cols-3 gap-2">
                         <button
                             @click="setTheme('light'); currentTheme = 'light'"
-                            :class="currentTheme === 'light' ? 'bg-pink-100 dark:bg-pink-900/50 border-pink-400 text-pink-700 dark:text-pink-300' : 'bg-stone-100 dark:bg-stone-700 border-stone-200 dark:border-stone-600 text-stone-600 dark:text-stone-300'"
+                            :class="currentTheme === 'light' ? 'bg-blue-200 dark:bg-blue-900/50 border-blue-500 text-blue-700 dark:text-blue-400' : 'bg-stone-100 dark:bg-stone-700 border-stone-200 dark:border-stone-600 text-stone-600 dark:text-stone-300'"
                             class="px-4 py-3 rounded-lg border-2 text-sm font-medium transition-colors flex items-center justify-center gap-2"
                         >
                             <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -690,7 +690,7 @@
                         </button>
                         <button
                             @click="setTheme('dark'); currentTheme = 'dark'"
-                            :class="currentTheme === 'dark' ? 'bg-pink-100 dark:bg-pink-900/50 border-pink-400 text-pink-700 dark:text-pink-300' : 'bg-stone-100 dark:bg-stone-700 border-stone-200 dark:border-stone-600 text-stone-600 dark:text-stone-300'"
+                            :class="currentTheme === 'dark' ? 'bg-blue-200 dark:bg-blue-900/50 border-blue-500 text-blue-700 dark:text-blue-400' : 'bg-stone-100 dark:bg-stone-700 border-stone-200 dark:border-stone-600 text-stone-600 dark:text-stone-300'"
                             class="px-4 py-3 rounded-lg border-2 text-sm font-medium transition-colors flex items-center justify-center gap-2"
                         >
                             <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -700,7 +700,7 @@
                         </button>
                         <button
                             @click="setTheme('system'); currentTheme = 'system'"
-                            :class="currentTheme === 'system' ? 'bg-pink-100 dark:bg-pink-900/50 border-pink-400 text-pink-700 dark:text-pink-300' : 'bg-stone-100 dark:bg-stone-700 border-stone-200 dark:border-stone-600 text-stone-600 dark:text-stone-300'"
+                            :class="currentTheme === 'system' ? 'bg-blue-200 dark:bg-blue-900/50 border-blue-500 text-blue-700 dark:text-blue-400' : 'bg-stone-100 dark:bg-stone-700 border-stone-200 dark:border-stone-600 text-stone-600 dark:text-stone-300'"
                             class="px-4 py-3 rounded-lg border-2 text-sm font-medium transition-colors flex items-center justify-center gap-2"
                         >
                             <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -716,7 +716,7 @@
                     <label class="block text-sm font-medium text-stone-600 dark:text-stone-400 mb-2" x-text="t('settings.language')"></label>
                     <select
                         @change="changeLanguage($event.target.value)"
-                        class="w-full border border-stone-200 dark:border-stone-600 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400 bg-white dark:bg-stone-700 text-stone-800 dark:text-stone-100"
+                        class="w-full border border-stone-200 dark:border-stone-600 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-stone-700 text-stone-800 dark:text-stone-100"
                     >
                         <template x-for="locale in window.locales" :key="locale.code">
                             <option :value="locale.code" :selected="window.currentLang === locale.code" x-text="locale.flag + ' ' + locale.name"></option>
@@ -738,18 +738,18 @@
                 <!-- Sponsor & Bug report -->
                 <div class="pt-4 border-t border-stone-100 dark:border-stone-700 space-y-2">
                     <a href="https://github.com/sponsors/PanSalut" target="_blank" rel="noopener"
-                       class="flex items-center gap-2 text-xs text-stone-400 dark:text-stone-500 hover:text-pink-500 transition-colors group">
+                       class="flex items-center gap-2 text-xs text-stone-400 dark:text-stone-500 hover:text-blue-600 transition-colors group">
                         <span class="text-base group-hover:animate-pulse">💖</span>
                         <span x-text="t('settings.sponsor')"></span>
                     </a>
-                    <a href="https://github.com/PanSalut/Koffan/issues" target="_blank" rel="noopener"
+                    <a href="#/issues" target="_blank" rel="noopener"
                        class="flex items-center gap-2 text-xs text-stone-400 dark:text-stone-500 hover:text-stone-600 dark:hover:text-stone-300 transition-colors group">
                         <span class="text-base">🐛</span>
                         <span x-text="t('settings.report_bug')"></span>
                     </a>
                     <!-- Version -->
                     <div class="pt-2 text-xs text-stone-300 dark:text-stone-600 text-center">
-                        Koffan <span x-text="currentVersion"></span>
+                        Bentomo Shopping <span x-text="currentVersion"></span>
                     </div>
                     <!-- Update notification -->
                     <a x-show="updateAvailable" x-cloak
@@ -772,13 +772,13 @@
                     <label class="block text-sm font-medium text-stone-600 dark:text-stone-400 mb-3" x-text="t('settings.history_section_mode')"></label>
                     <div class="space-y-2">
                         <label class="flex items-center gap-3 p-3 bg-stone-50 dark:bg-stone-700 rounded-xl cursor-pointer hover:bg-stone-100 dark:hover:bg-stone-600 transition-colors"
-                               :class="historySectionMode === 'use_first_section' && 'ring-2 ring-pink-400 bg-pink-50 dark:bg-pink-900/30'">
+                               :class="historySectionMode === 'use_first_section' && 'ring-2 ring-blue-500 bg-blue-50 dark:bg-blue-900/30'">
                             <input type="radio"
                                    name="history_section_mode"
                                    value="use_first_section"
                                    x-model="historySectionMode"
                                    @change="setHistorySectionMode('use_first_section')"
-                                   class="w-4 h-4 text-pink-500 focus:ring-pink-500 border-stone-300 dark:border-stone-500 accent-pink-500">
+                                   class="w-4 h-4 text-blue-600 focus:ring-blue-600 border-stone-300 dark:border-stone-500 accent-blue-600">
                             <div class="flex-1 min-w-0">
                                 <p class="text-sm font-medium text-stone-700 dark:text-stone-200" x-text="t('settings.use_first_section')"></p>
                                 <p class="text-xs text-stone-400 dark:text-stone-500" x-text="t('settings.use_first_section_desc')"></p>
@@ -786,13 +786,13 @@
                         </label>
 
                         <label class="flex items-center gap-3 p-3 bg-stone-50 dark:bg-stone-700 rounded-xl cursor-pointer hover:bg-stone-100 dark:hover:bg-stone-600 transition-colors"
-                               :class="historySectionMode === 'auto_create_section' && 'ring-2 ring-pink-400 bg-pink-50 dark:bg-pink-900/30'">
+                               :class="historySectionMode === 'auto_create_section' && 'ring-2 ring-blue-500 bg-blue-50 dark:bg-blue-900/30'">
                             <input type="radio"
                                    name="history_section_mode"
                                    value="auto_create_section"
                                    x-model="historySectionMode"
                                    @change="setHistorySectionMode('auto_create_section')"
-                                   class="w-4 h-4 text-pink-500 focus:ring-pink-500 border-stone-300 dark:border-stone-500 accent-pink-500">
+                                   class="w-4 h-4 text-blue-600 focus:ring-blue-600 border-stone-300 dark:border-stone-500 accent-blue-600">
                             <div class="flex-1 min-w-0">
                                 <p class="text-sm font-medium text-stone-700 dark:text-stone-200" x-text="t('settings.auto_create_section')"></p>
                                 <p class="text-xs text-stone-400 dark:text-stone-500" x-text="t('settings.auto_create_section_desc')"></p>
@@ -816,6 +816,24 @@
                         <span x-text="t('history.manage')"></span>
                     </button>
                     <p x-show="!isOnline" x-cloak class="text-xs text-stone-400 dark:text-stone-500 text-center mt-2" x-text="t('offline.action_blocked')"></p>
+                </div>
+
+                <!-- Archive completed items (keep sections) -->
+                <div class="mb-4">
+                    <button
+                        @click="archiveCompletedItems()"
+                        :disabled="!isOnline"
+                        :class="isOnline
+                            ? 'bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/50 border-blue-200 dark:border-blue-800'
+                            : 'bg-stone-100 dark:bg-stone-800 text-stone-400 dark:text-stone-600 border-stone-200 dark:border-stone-700 cursor-not-allowed'"
+                        class="w-full flex items-center justify-center gap-2 p-3 rounded-xl border transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a3 3 0 110-6h14a3 3 0 110 6M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path>
+                        </svg>
+                        <span x-text="t('settings.archive_completed')"></span>
+                    </button>
+                    <p class="text-xs text-stone-400 dark:text-stone-500 text-center mt-1" x-text="t('settings.archive_completed_description')"></p>
+                    <p x-show="!isOnline" x-cloak class="text-xs text-stone-400 dark:text-stone-500 text-center mt-1" x-text="t('offline.action_blocked')"></p>
                 </div>
 
                 <!-- Delete completed items -->
@@ -880,15 +898,15 @@
                         <!-- Conflict resolution options -->
                         <div class="mt-4 space-y-2">
                             <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="radio" name="conflict_resolution" value="skip" x-model="importConflictResolution" class="text-pink-500 focus:ring-pink-500">
+                                <input type="radio" name="conflict_resolution" value="skip" x-model="importConflictResolution" class="text-blue-600 focus:ring-blue-600">
                                 <span class="text-sm text-stone-700 dark:text-stone-200" x-text="t('import.conflict_skip')"></span>
                             </label>
                             <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="radio" name="conflict_resolution" value="replace" x-model="importConflictResolution" class="text-pink-500 focus:ring-pink-500">
+                                <input type="radio" name="conflict_resolution" value="replace" x-model="importConflictResolution" class="text-blue-600 focus:ring-blue-600">
                                 <span class="text-sm text-stone-700 dark:text-stone-200" x-text="t('import.conflict_replace')"></span>
                             </label>
                             <label class="flex items-center gap-2 cursor-pointer">
-                                <input type="radio" name="conflict_resolution" value="copy" x-model="importConflictResolution" class="text-pink-500 focus:ring-pink-500">
+                                <input type="radio" name="conflict_resolution" value="copy" x-model="importConflictResolution" class="text-blue-600 focus:ring-blue-600">
                                 <span class="text-sm text-stone-700 dark:text-stone-200" x-text="t('import.conflict_copy')"></span>
                             </label>
                         </div>
@@ -902,7 +920,7 @@
                     x-text="t('common.cancel')">
                 </button>
                 <button type="button" @click="confirmImport()"
-                    class="flex-1 bg-pink-400 hover:bg-pink-500 text-white py-3 rounded-lg text-sm font-medium transition-colors"
+                    class="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-3 rounded-lg text-sm font-medium transition-colors"
                     x-text="t('import.confirm')">
                 </button>
             </div>
@@ -937,7 +955,7 @@
                     </svg>
                     <input type="text" x-model="historySearch"
                         :placeholder="t('history.search_placeholder')"
-                        class="w-full pl-10 pr-4 py-2.5 text-sm border border-stone-200 dark:border-stone-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400 bg-white dark:bg-stone-700 text-stone-800 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500">
+                        class="w-full pl-10 pr-4 py-2.5 text-sm border border-stone-200 dark:border-stone-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-stone-700 text-stone-800 dark:text-stone-100 placeholder:text-stone-400 dark:placeholder:text-stone-500">
                 </div>
             </div>
 
@@ -956,9 +974,9 @@
                         <div class="flex items-center gap-3 py-3">
                             <button @click="toggleHistoryItem(item.id)" class="flex-shrink-0">
                                 <span x-show="!selectedHistoryIds.includes(item.id)"
-                                    class="w-5 h-5 rounded-full border-2 border-stone-300 dark:border-stone-500 hover:border-pink-400 transition-all block"></span>
+                                    class="w-5 h-5 rounded-full border-2 border-stone-300 dark:border-stone-500 hover:border-blue-500 transition-all block"></span>
                                 <span x-show="selectedHistoryIds.includes(item.id)" x-cloak
-                                    class="w-5 h-5 rounded-full bg-pink-400 flex items-center justify-center">
+                                    class="w-5 h-5 rounded-full bg-blue-500 flex items-center justify-center">
                                     <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
                                     </svg>
@@ -1017,12 +1035,12 @@
             {{range .Lists}}
             <a
                 href="/lists/{{.ID}}/activate"
-                class="w-full flex items-center gap-3 px-4 py-2.5 text-left hover:bg-stone-50 dark:hover:bg-stone-700 transition-colors {{if eq .ID $.List.ID}}bg-pink-50 dark:bg-pink-900/30{{end}}"
+                class="w-full flex items-center gap-3 px-4 py-2.5 text-left hover:bg-stone-50 dark:hover:bg-stone-700 transition-colors {{if eq .ID $.List.ID}}bg-blue-50 dark:bg-blue-900/30{{end}}"
             >
                 <span class="text-lg">{{.Icon}}</span>
-                <span class="flex-1 truncate text-sm font-medium {{if eq .ID $.List.ID}}text-pink-600 dark:text-pink-400{{else}}text-stone-700 dark:text-stone-200{{end}}">{{.Name}}</span>
+                <span class="flex-1 truncate text-sm font-medium {{if eq .ID $.List.ID}}text-blue-700 dark:text-blue-500{{else}}text-stone-700 dark:text-stone-200{{end}}">{{.Name}}</span>
                 {{if eq .ID $.List.ID}}
-                <svg class="w-4 h-4 text-pink-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg class="w-4 h-4 text-blue-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
                 {{end}}

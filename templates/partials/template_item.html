@@ -46,17 +46,17 @@
                     x-model="editName"
                     x-ref="editInput"
                     @keydown.escape="editing = false"
-                    class="w-full border border-stone-200 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent"
+                    class="w-full border border-stone-200 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
                 <input
                     type="text"
                     name="description"
                     x-model="editDesc"
                     :placeholder="t('items.note_optional')"
-                    class="w-full border border-stone-200 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent"
+                    class="w-full border border-stone-200 rounded-lg px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >
                 <div class="flex items-center gap-2">
-                    <button type="submit" class="p-1.5 text-pink-500 hover:text-pink-600">
+                    <button type="submit" class="p-1.5 text-blue-600 hover:text-blue-700">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                         </svg>
@@ -76,7 +76,7 @@
             <button
                 hx-post="/templates/{{.Template.ID}}/apply"
                 hx-swap="none"
-                class="px-3 py-1.5 bg-pink-400 hover:bg-pink-500 text-white text-sm rounded-lg transition-colors"
+                class="px-3 py-1.5 bg-blue-500 hover:bg-blue-600 text-white text-sm rounded-lg transition-colors"
                 x-text="t('templates.apply')"
             >
                 Zastosuj
@@ -154,18 +154,18 @@
                 name="section_name"
                 :placeholder="t('templates.section')"
                 required
-                class="w-24 border border-stone-200 rounded-lg px-2 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent"
+                class="w-24 border border-stone-200 rounded-lg px-2 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
             <input
                 type="text"
                 name="name"
                 :placeholder="t('items.name')"
                 required
-                class="flex-1 border border-stone-200 rounded-lg px-2 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-pink-400 focus:border-transparent"
+                class="flex-1 border border-stone-200 rounded-lg px-2 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             >
             <button
                 type="submit"
-                class="p-1.5 text-pink-500 hover:text-pink-600 rounded-lg transition-colors"
+                class="p-1.5 text-blue-600 hover:text-blue-700 rounded-lg transition-colors"
             >
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>

@@ -964,6 +964,12 @@ function shoppingList() {
                         }
                         this.refreshStats();
                         break;
+                    case 'completed_items_archived':
+                        if (!this.isLocalAction('completed_items_archived')) {
+                            this.removeAllCompletedItemsFromDOM();
+                        }
+                        this.refreshStats();
+                        break;
                     case 'pong':
                         break;
                     case 'list_updated':
@@ -1805,6 +1811,45 @@ function shoppingList() {
                 }
             } catch (error) {
                 console.error('[App] Failed to delete completed items:', error);
+                window.Toast.show(t('error.delete_items'), 'warning');
+            }
+        },
+
+        async archiveCompletedItems() {
+            if (!this.isOnline) {
+                window.Toast.show(t('offline.action_blocked'), 'warning');
+                return;
+            }
+
+            const confirmed = confirm(t('confirm.archive_completed_items'));
+            if (!confirmed) return;
+
+            try {
+                const listId = this.currentListId();
+                if (!listId) {
+                    window.Toast.show(t('error.no_active_list'), 'warning');
+                    return;
+                }
+                const response = await fetch(`/lists/${listId}/archive-completed`, { method: 'POST' });
+                if (response.ok) {
+                    const result = await response.json();
+                    console.log('[App] Archived', result.archived, 'completed items');
+
+                    this.markLocalAction('completed_items_archived');
+
+                    this.showSettings = false;
+
+                    this.removeAllCompletedItemsFromDOM();
+                    this.refreshStats();
+
+                    if (result.archived > 0) {
+                        window.Toast.show(t('settings.archive_completed_count', {count: result.archived}), 'success');
+                    }
+                } else {
+                    window.Toast.show(t('error.delete_items'), 'warning');
+                }
+            } catch (error) {
+                console.error('[App] Failed to archive completed items:', error);
                 window.Toast.show(t('error.delete_items'), 'warning');
             }
         },

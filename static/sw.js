@@ -1,7 +1,7 @@
-// Koffan Service Worker - Offline Support
+// Bentomo Service Worker - Offline Support
 // __CACHE_VERSION__ and __ASSET_HASH__ are replaced at serve time by
 // handlers.ServeServiceWorker using the startup-computed asset hash.
-const CACHE_VERSION = 'koffan-__CACHE_VERSION__';
+const CACHE_VERSION = 'bentomo-__CACHE_VERSION__';
 const STATIC_CACHE = CACHE_VERSION + '-static';
 const DYNAMIC_CACHE = CACHE_VERSION + '-dynamic';
 
@@ -13,12 +13,15 @@ const STATIC_ASSETS = [
     '/static/app.js?v=__ASSET_HASH__',
     '/static/offline-storage.js?v=__ASSET_HASH__',
     '/static/manifest.json',
-    '/static/koffan-logo.webp',
+    '/static/bentomo-logo.png',
+    '/static/bentomo-logo-smaller.png',
     '/static/icon-192.png',
     '/static/icon-512.png',
     '/static/favicon.ico',
+    '/static/favicon-32.png',
     '/static/favicon-96.png',
     '/static/apple-touch-icon.png',
+    '/static/Bentomo-shopping-family-hugotaller.png',
     '/static/tailwind.min.js?v=__ASSET_HASH__',
     '/static/htmx.min.js?v=__ASSET_HASH__',
     '/static/htmx-ws.js?v=__ASSET_HASH__',
@@ -50,7 +53,7 @@ self.addEventListener('activate', (event) => {
             .then(keys => {
                 return Promise.all(
                     keys.filter(key => {
-                        return key.startsWith('koffan-') &&
+                        return key.startsWith('bentomo-') &&
                                key !== STATIC_CACHE &&
                                key !== DYNAMIC_CACHE;
                     }).map(key => {
@@ -134,7 +137,7 @@ async function cacheFirst(request) {
         console.warn('[SW] Cache first failed:', request.url);
         // Return a simple offline page for HTML requests
         if (request.headers.get('accept')?.includes('text/html')) {
-            return new Response('<html><body style="font-family:system-ui;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;background:#fafaf9"><div style="text-align:center"><h1 style="color:#78716c">Koffan Offline</h1><p style="color:#a8a29e">Check your connection</p></div></body></html>', {
+            return new Response('<html><body style="font-family:system-ui;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;background:#fafaf9"><div style="text-align:center"><h1 style="color:#78716c">Bentomo Offline</h1><p style="color:#a8a29e">Check your connection</p></div></body></html>', {
                 headers: { 'Content-Type': 'text/html' }
             });
         }
@@ -164,7 +167,7 @@ async function networkFirst(request) {
             if (mainPage) {
                 return mainPage;
             }
-            return new Response('<html><body style="font-family:system-ui;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;background:#fafaf9"><div style="text-align:center"><h1 style="color:#78716c">Koffan Offline</h1><p style="color:#a8a29e">Check your connection</p></div></body></html>', {
+            return new Response('<html><body style="font-family:system-ui;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;background:#fafaf9"><div style="text-align:center"><h1 style="color:#78716c">Bentomo Offline</h1><p style="color:#a8a29e">Check your connection</p></div></body></html>', {
                 headers: { 'Content-Type': 'text/html' }
             });
         }
@@ -190,7 +193,7 @@ async function listPageStrategy(request) {
         }
 
         // List not cached - show offline message
-        return new Response('<html><body style="font-family:system-ui;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;background:#fafaf9"><div style="text-align:center"><h1 style="color:#78716c">Koffan Offline</h1><p style="color:#a8a29e">This list is not saved offline.</p><a href="/" style="color:#f472b6;text-decoration:none">Back to home page</a></div></body></html>', {
+        return new Response('<html><body style="font-family:system-ui;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;background:#fafaf9"><div style="text-align:center"><h1 style="color:#78716c">Bentomo Offline</h1><p style="color:#a8a29e">This list is not saved offline.</p><a href="/" style="color:#f472b6;text-decoration:none">Back to home page</a></div></body></html>', {
             headers: { 'Content-Type': 'text/html' }
         });
     }

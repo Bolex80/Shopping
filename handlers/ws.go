@@ -74,22 +74,34 @@ func BroadcastUpdate(eventType string, data interface{}) {
 	}
 
 	clientsMu.RLock()
-	clientCount := len(clients)
-	log.Printf("Broadcasting %s to %d clients", eventType, clientCount)
+	snapshot := make([]*websocket.Conn, 0, len(clients))
+	for client := range clients {
+		snapshot = append(snapshot, client)
+	}
+	clientsMu.RUnlock()
 
 	successCount := 0
-	for client := range clients {
+	var failed []*websocket.Conn
+	for _, client := range snapshot {
 		err := client.WriteMessage(websocket.TextMessage, messageBytes)
 		if err != nil {
-			log.Printf("Failed to send WebSocket message to client: %v", err)
-			// Don't remove client here, let the read loop handle it
+			failed = append(failed, client)
 		} else {
 			successCount++
 		}
 	}
-	clientsMu.RUnlock()
 
-	log.Printf("Broadcast %s completed: %d/%d clients received", eventType, successCount, clientCount)
+	if len(failed) > 0 {
+		clientsMu.Lock()
+		for _, c := range failed {
+			delete(clients, c)
+			c.Close()
+		}
+		clientsMu.Unlock()
+		log.Printf("Broadcast %s: removed %d dead clients", eventType, len(failed))
+	}
+
+	log.Printf("Broadcast %s completed: %d/%d clients received", eventType, successCount, len(snapshot))
 }
 
 // WebSocketUpgrade middleware to upgrade HTTP to WebSocket

@@ -1,8 +1,6 @@
 package handlers
 
 import (
-	"encoding/json"
-	"net/http"
 	"strings"
 	"sync"
 	"time"
@@ -14,7 +12,6 @@ import (
 var AppVersion = "dev"
 
 const (
-	githubTagsURL   = "https://api.github.com/repos/PanSalut/Koffan/tags"
 	versionCacheTTL = 1 * time.Hour
 )
 
@@ -46,10 +43,6 @@ func GetVersion(c *fiber.Ctx) error {
 		UpdateAvailable: updateAvailable,
 	}
 
-	if updateAvailable && latest != "unknown" {
-		response.ReleaseURL = "https://github.com/PanSalut/Koffan/releases/tag/" + latest
-	}
-
 	return c.JSON(response)
 }
 
@@ -74,28 +67,8 @@ func getCachedVersion() string {
 }
 
 func fetchLatestVersion() string {
-	client := &http.Client{Timeout: 5 * time.Second}
-
-	resp, err := client.Get(githubTagsURL)
-	if err != nil {
-		return "unknown"
-	}
-	defer resp.Body.Close()
-
-	if resp.StatusCode != http.StatusOK {
-		return "unknown"
-	}
-
-	var tags []githubTag
-	if err := json.NewDecoder(resp.Body).Decode(&tags); err != nil {
-		return "unknown"
-	}
-
-	if len(tags) == 0 {
-		return "unknown"
-	}
-
-	return tags[0].Name
+	// No external update check for Bentomo fork
+	return "unknown"
 }
 
 // isNewerVersion compares semver strings, returns true if latest > current
