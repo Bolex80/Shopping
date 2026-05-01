@@ -49,6 +49,9 @@ func main() {
 	// Initialize login rate limiter
 	handlers.InitLoginRateLimiter()
 
+	// Start auto-archive background scheduler (weekly + monthly)
+	handlers.StartAutoArchiveScheduler()
+
 	// Initialize template engine
 	templatesRootFS, err := fs.Sub(embeddedTemplatesFS, "templates")
 	if err != nil {

@@ -970,6 +970,11 @@ function shoppingList() {
                         }
                         this.refreshStats();
                         break;
+                    case 'auto_archive_completed':
+                        // Background scheduler archived completed items
+                        this.removeAllCompletedItemsFromDOM();
+                        this.refreshStats();
+                        break;
                     case 'pong':
                         break;
                     case 'list_updated':

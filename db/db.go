@@ -178,8 +178,8 @@ func runMigrations() {
 	// Migration: Add sort_mode to sections
 	migrateSectionSortMode()
 
-	// Migration: Add show_completed to lists
-	migrateListShowCompleted()
+	// Migration: Add auto_archive_state table
+	migrateAutoArchiveState()
 }
 
 func migrateToMultipleLists() {
@@ -377,6 +377,38 @@ func migrateListShowCompleted() {
 	}
 
 	log.Println("Migration completed: List show_completed added")
+}
+
+func migrateAutoArchiveState() {
+	var count int
+	err := DB.QueryRow("SELECT COUNT(*) FROM sqlite_master WHERE type='table' AND name='auto_archive_state'").Scan(&count)
+	if err != nil {
+		log.Println("Migration check failed:", err)
+		return
+	}
+	if count == 0 {
+		log.Println("Running migration: Adding auto_archive_state table...")
+
+		_, err = DB.Exec(`
+			CREATE TABLE IF NOT EXISTS auto_archive_state (
+				id INTEGER PRIMARY KEY CHECK (id = 1),
+				last_weekly_week TEXT DEFAULT '',
+				last_monthly_month TEXT DEFAULT '',
+				last_run_at INTEGER DEFAULT 0
+			)
+		`)
+		if err != nil {
+			log.Println("Migration failed - creating auto_archive_state table:", err)
+			return
+		}
+		log.Println("Migration completed: auto_archive_state table added")
+	}
+
+	// Ensure the single row exists (handles both newly-created and pre-existing tables)
+	_, err = DB.Exec("INSERT OR IGNORE INTO auto_archive_state (id) VALUES (1)")
+	if err != nil {
+		log.Println("Migration warning - seeding auto_archive_state:", err)
+	}
 }
 
 func Close() {

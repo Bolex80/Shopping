@@ -19,3 +19,4 @@ services:
 
 volumes:
   shopping-data:
+    external: true

@@ -1938,3 +1938,47 @@ func ClearAllData() error {
 
 	return tx.Commit()
 }
+
+// GetAutoArchiveState returns the current auto-archive tracking state.
+func GetAutoArchiveState() (lastWeeklyWeek, lastMonthlyMonth string, lastRunAt int64, err error) {
+	err = DB.QueryRow("SELECT last_weekly_week, last_monthly_month, last_run_at FROM auto_archive_state WHERE id = 1").Scan(
+		&lastWeeklyWeek, &lastMonthlyMonth, &lastRunAt)
+	if err == sql.ErrNoRows {
+		return "", "", 0, nil
+	}
+	return
+}
+
+// SetAutoArchiveState updates the auto-archive tracking state.
+func SetAutoArchiveState(lastWeeklyWeek, lastMonthlyMonth string, lastRunAt int64) error {
+	_, err := DB.Exec(`
+		UPDATE auto_archive_state SET last_weekly_week = ?, last_monthly_month = ?, last_run_at = ? WHERE id = 1
+	`, lastWeeklyWeek, lastMonthlyMonth, lastRunAt)
+	return err
+}
+
+// GetFullyCompletedListIDs returns IDs of lists where every item is completed
+// (i.e. there is at least one item and zero uncompleted items).
+func GetFullyCompletedListIDs() ([]int64, error) {
+	rows, err := DB.Query(`
+		SELECT s.list_id
+		FROM sections s
+		JOIN items i ON i.section_id = s.id
+		GROUP BY s.list_id
+		HAVING COUNT(*) > 0 AND SUM(CASE WHEN i.completed = FALSE THEN 1 ELSE 0 END) = 0
+	`)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+
+	var ids []int64
+	for rows.Next() {
+		var id int64
+		if err := rows.Scan(&id); err != nil {
+			return nil, err
+		}
+		ids = append(ids, id)
+	}
+	return ids, rows.Err()
+}
