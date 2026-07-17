@@ -533,13 +533,13 @@ func importJSON(c *fiber.Ctx, data []byte, conflictResolution, copySuffix string
 
 	// Import templates
 	for _, exportTemplate := range exportData.Data.Templates {
-		template, err := db.CreateTemplate(exportTemplate.Name, exportTemplate.Description)
+		template, err := db.CreateTemplateTx(tx, exportTemplate.Name, exportTemplate.Description)
 		if err != nil {
 			continue
 		}
 
 		for _, item := range exportTemplate.Items {
-			db.AddTemplateItem(template.ID, item.SectionName, item.Name, item.Description)
+			_, _ = db.AddTemplateItemTx(tx, template.ID, item.SectionName, item.Name, item.Description)
 		}
 		importedTemplates++
 	}

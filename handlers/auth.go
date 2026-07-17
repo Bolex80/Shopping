@@ -52,6 +52,14 @@ func generateSessionID() (string, error) {
 	return hex.EncodeToString(bytes), nil
 }
 
+func sessionIDPrefix(sessionID string) string {
+	const prefixLength = 8
+	if len(sessionID) <= prefixLength {
+		return sessionID
+	}
+	return sessionID[:prefixLength]
+}
+
 // LoginPage renders the login page
 func LoginPage(c *fiber.Ctx) error {
 	// Check if already logged in
@@ -102,7 +110,7 @@ func Login(c *fiber.Ctx) error {
 	if err != nil {
 		return sendError(c, 500, "error.session_failed")
 	}
-	log.Printf("[AUTH] New session created: %s... (expires: %d)", sessionID[:8], expiresAt)
+	log.Printf("[AUTH] New session created: %s... (expires: %d)", sessionIDPrefix(sessionID), expiresAt)
 
 	// Set cookie
 	c.Cookie(&fiber.Cookie{
@@ -165,7 +173,7 @@ func AuthMiddleware(c *fiber.Ctx) error {
 	if err != nil {
 		// Check if it's a "not found" error vs database error
 		if errors.Is(err, sql.ErrNoRows) {
-			log.Printf("[AUTH] Session not found in DB for %s %s (sessionID: %s...)", c.Method(), path, sessionID[:8])
+			log.Printf("[AUTH] Session not found in DB for %s %s (sessionID: %s...)", c.Method(), path, sessionIDPrefix(sessionID))
 			// Only delete if session truly doesn't exist
 			db.DeleteSession(sessionID)
 		} else {
