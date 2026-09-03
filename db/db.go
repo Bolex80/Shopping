@@ -191,6 +191,9 @@ func runMigrations() {
 	// Migration: Add sort_mode to sections
 	migrateSectionSortMode()
 
+	// Migration: Add show_completed to lists
+	migrateListShowCompleted()
+
 	// Migration: Add auto_archive_state table
 	migrateAutoArchiveState()
 }

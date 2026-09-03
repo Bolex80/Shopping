@@ -55,6 +55,10 @@ func initTestDatabase(t *testing.T) {
 }
 
 func postImportFile(t *testing.T, app *fiber.App, filename, contents string) *http.Response {
+	return postImportFileWithResolution(t, app, filename, contents, "skip")
+}
+
+func postImportFileWithResolution(t *testing.T, app *fiber.App, filename, contents, conflictResolution string) *http.Response {
 	t.Helper()
 
 	var body bytes.Buffer
@@ -66,7 +70,7 @@ func postImportFile(t *testing.T, app *fiber.App, filename, contents string) *ht
 	if _, err := io.WriteString(part, contents); err != nil {
 		t.Fatalf("write multipart file: %v", err)
 	}
-	if err := writer.WriteField("conflict_resolution", "skip"); err != nil {
+	if err := writer.WriteField("conflict_resolution", conflictResolution); err != nil {
 		t.Fatalf("write multipart field: %v", err)
 	}
 	if err := writer.Close(); err != nil {
